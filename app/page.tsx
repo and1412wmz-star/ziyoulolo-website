@@ -1,12 +1,9 @@
+import { Hero } from "@/components/hero";
+
 export default function Home() {
   return (
-    <section className="flex min-h-screen flex-col items-center justify-center bg-white px-6 text-center">
-      <h1 className="text-[64px] font-bold leading-none tracking-tight text-black">
-        ZIYOU LOLO
-      </h1>
-      <p className="mt-4 text-[20px] leading-snug text-zinc-500">
-        Original Artist
-      </p>
-    </section>
+    <div className="flex w-full flex-1 flex-col items-center justify-start px-6 pt-[14vh]">
+      <Hero />
+    </div>
   );
 }

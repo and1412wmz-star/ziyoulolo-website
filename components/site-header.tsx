@@ -1,30 +1,61 @@
 import Link from "next/link";
+import Image from "next/image";
+import type { CSSProperties } from "react";
 
 import { Container } from "@/components/container";
 
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/explore", label: "Explore" },
-  { href: "/story", label: "Story" },
-  { href: "/news", label: "News" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Home", imageSrc: "/home/home.svg", width: 66, offsetX: -3, offsetY: 10 },
+  {
+    href: "/explore",
+    label: "Explore",
+    imageSrc: "/home/explore.svg",
+    width: 83,
+    offsetX: 0,
+    offsetY: 15,
+  },
+  { href: "/news", label: "News", imageSrc: "/home/news.svg", width: 68, offsetX: -1, offsetY: 12 },
+  { href: "/story", label: "Story", imageSrc: "/home/story.svg", width: 54, offsetX: 2, offsetY: 16 },
+  {
+    href: "/contact",
+    label: "Contact",
+    imageSrc: "/home/contact.svg",
+    width: 88,
+    offsetX: 2,
+    offsetY: 12,
+  },
 ] as const;
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-black/10 bg-white">
-      <Container className="flex items-center justify-between gap-6 py-4">
-        <Link href="/" className="text-sm font-semibold tracking-[0.22em] text-black">
-          ZIYOU &amp; LOLO
-        </Link>
-        <nav aria-label="Primary" className="flex flex-wrap items-center justify-end gap-x-6 gap-y-2">
+    <header className="absolute inset-x-0 top-0 z-50">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-[120px] bg-white"
+        style={{ clipPath: "ellipse(120% 100% at 50% 0%)" }}
+      />
+      <Container className="relative pt-7 sm:pt-9">
+        <nav aria-label="Primary" className="flex items-center justify-center gap-9 sm:gap-11">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm text-black/70 hover:text-black"
+              className="transition-opacity duration-200 hover:opacity-70"
             >
-              {item.label}
+              <Image
+                src={item.imageSrc}
+                alt={item.label}
+                width={item.width}
+                height={64}
+                priority
+                className="nav-item-img block"
+                style={
+                  {
+                    "--nav-width": `${item.width}px`,
+                    "--nav-x": `${item.offsetX}px`,
+                    "--nav-y": `${item.offsetY}px`,
+                  } as CSSProperties
+                }
+              />
             </Link>
           ))}
         </nav>
